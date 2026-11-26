@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Starverse Learning</title>
+<meta name="description" content="Free daily review games for Grade 2 and Grade 5. TEKS-aligned. No sign-in, no accounts, nothing collected.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+:root{ color-scheme:dark; --space:#0B1026; --black:#050A1A; --navy:#2D3B78; --slate:#1C2444; --mist:#2D3768; --nebula:#6832F6; --orbit:#22D3EE; --star:#FFD93D; --solar:#FF8A3D; --magenta:#FF5ACD; --mint:#7CFBB2; --cloud:#F5F8FF; --lilac:#EEF0FF; --soft:#B9C2EE; }
+*,*::before,*::after{ box-sizing:border-box; }
+html{ height:100%; }
+body{ margin:0; min-height:100%; font-family:"Nunito",ui-rounded,system-ui,sans-serif; color:var(--cloud); background:radial-gradient(ellipse at 30% 0%,#1B2350 0%,var(--space) 55%,var(--black) 100%) fixed; }
+body::before{ content:""; position:fixed; inset:0; pointer-events:none; opacity:.55;
+  background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 33% 72%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 58% 28%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 82% 62%,#fff 50%,transparent 51%),radial-gradient(2px 2px at 91% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 6% 88%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 47% 92%,#fff 50%,transparent 51%); }
+main{ position:relative; max-width:960px; margin:0 auto; padding:22px 16px 48px; }
+button{ font:inherit; color:inherit; cursor:pointer; }
+a{ color:var(--orbit); }
+:focus-visible{ outline:3px solid var(--orbit); outline-offset:3px; }
+.brand{ text-align:center; margin:8px 0 18px; }
+.logo{ font-family:"Baloo 2",system-ui,sans-serif; font-weight:800; font-size:clamp(42px,9vw,66px); line-height:1; background:linear-gradient(90deg,var(--star),var(--magenta) 55%,var(--orbit)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.tag{ font-weight:800; color:var(--soft); font-size:17px; margin-top:6px; }
+.mode{ display:flex; justify-content:center; margin:0 0 20px; }
+.mode span{ background:var(--slate); border:2px solid var(--mist); border-radius:999px; padding:6px 14px; font-weight:800; font-size:15px; color:var(--soft); }
+.mode span.home{ border-color:var(--mint); color:var(--mint); }
+h2.sec{ font-family:"Baloo 2",sans-serif; font-size:30px; margin:0 0 10px; text-align:center; }
+.grades{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+.grade{ display:block; text-decoration:none; color:var(--cloud); border-radius:26px; padding:22px 18px; border:3px solid transparent; text-align:center; transition:transform .15s; }
+.grade:hover{ transform:translateY(-3px); }
+.grade.g2{ background:linear-gradient(150deg,#0E5A6B,#0B3A4C); border-color:var(--orbit); }
+.grade.g5{ background:linear-gradient(150deg,var(--nebula),#3C1FA0); border-color:#8F6BFF; }
+.grade .ic{ font-size:64px; line-height:1.1; }
+.grade .nm{ font-family:"Baloo 2",sans-serif; font-weight:800; font-size:38px; line-height:1.05; margin-top:4px; }
+.grade .what{ font-weight:700; opacity:.92; margin-top:4px; }
+.status{ display:inline-block; background:rgba(255,255,255,.14); border-radius:999px; padding:4px 12px; font-weight:900; font-size:15px; margin-top:10px; }
+.status.open{ background:var(--mint); color:#0B3A2A; }
+.go{ display:inline-block; margin-top:12px; background:var(--star); color:#2A2000; font-weight:900; border-radius:999px; padding:10px 20px; font-size:18px; box-shadow:0 4px 0 #C9A400; }
+.missions{ margin-top:34px; background:rgba(28,36,68,.7); border:2px solid var(--mist); border-radius:26px; padding:18px; }
+.mhead{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
+.mhead h2{ margin:0; font-family:"Baloo 2",sans-serif; font-size:28px; }
+.soon{ background:var(--solar); color:#2A1300; font-weight:900; border-radius:999px; padding:3px 12px; font-size:14px; }
+.mintro{ color:var(--soft); font-weight:700; margin:0 0 12px; }
+.tabs{ display:flex; gap:8px; margin-bottom:12px; }
+.tabs button{ background:var(--slate); border:2px solid var(--mist); border-radius:999px; padding:6px 16px; font-weight:900; }
+.tabs button[aria-pressed="true"]{ background:var(--orbit); color:#04212A; border-color:var(--orbit); }
+.cols{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
+.col h3{ margin:4px 0 8px; font-size:18px; color:var(--star); }
+.mlist{ list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+.mlist li{ display:flex; gap:10px; align-items:flex-start; background:var(--slate); border:2px solid var(--mist); border-radius:16px; padding:10px 12px; }
+.mlist .e{ font-size:26px; line-height:1; }
+.mlist b{ display:block; } .mlist span{ color:var(--soft); font-weight:700; font-size:15px; }
+.foot{ text-align:center; margin-top:28px; display:grid; gap:10px; justify-items:center; }
+.pill{ background:none; border:2px solid var(--mist); border-radius:999px; padding:8px 18px; font-weight:800; color:var(--soft); }
+.pill.save{ border-color:var(--mint); color:var(--mint); }
+.fine{ color:#8D97C9; font-size:14px; font-weight:700; max-width:620px; }
+.overlay{ position:fixed; inset:0; background:rgba(5,10,26,.82); display:grid; place-items:center; padding:16px; z-index:10; }
+.modal{ background:var(--slate); border:3px solid var(--mist); border-radius:24px; padding:22px; width:min(420px,100%); text-align:center; max-height:94vh; overflow:auto; }
+.modal h3{ margin:0 0 8px; font-family:"Baloo 2",sans-serif; font-size:28px; line-height:1.1; }
+.modal p{ margin:8px 0; font-weight:700; color:var(--lilac); }
+.modal ul{ text-align:left; margin:8px 0; padding-left:20px; font-weight:700; color:var(--lilac); }
+.modal input{ width:100%; font:inherit; font-size:22px; font-weight:800; text-align:center; padding:10px; border-radius:14px; border:2px solid var(--mist); background:#fff; color:#1C2444; }
+.pinpad{ display:flex; justify-content:center; gap:10px; margin:12px 0; } .pinpad span{ width:18px; height:18px; border-radius:50%; border:3px solid var(--orbit); } .pinpad span.f{ background:var(--orbit); }
+.pad{ display:grid; grid-template-columns:repeat(3,64px); gap:10px; justify-content:center; } .pad button{ height:56px; border-radius:16px; background:var(--mist); border:none; font-size:24px; font-weight:900; }
+.row{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:14px; }
+.btn{ background:var(--star); color:#2A2000; border:none; border-radius:999px; padding:10px 20px; font-weight:900; font-size:17px; box-shadow:0 4px 0 #C9A400; }
+.btn.ghost{ background:var(--mist); color:var(--cloud); box-shadow:none; }
+.btn.warn{ background:var(--solar); color:#2A1300; box-shadow:0 4px 0 #B45A1E; }
+.gopts{ display:grid; gap:10px; margin-top:8px; } .gopts a, .gopts button{ display:block; text-decoration:none; background:var(--mist); color:var(--cloud); border:2px solid #4252A0; border-radius:16px; padding:12px; font-weight:900; font-size:18px; }
+.link{ background:none; border:none; color:var(--orbit); font-weight:800; text-decoration:underline; margin-top:10px; }
+.msg{ min-height:24px; color:var(--star); font-weight:800; }
+.shake{ animation:shake .4s; } @keyframes shake{ 25%{ transform:translateX(-8px); } 75%{ transform:translateX(8px); } }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <header class="brand"><div class="logo">Starverse</div><div class="tag">Free daily review games for Grade 2 and Grade 5</div></header>
+  <div class="mode" id="mode"></div>
+  <h2 class="sec">Pick your grade</h2>
+  <div class="grades" id="grades"></div>
+
+  <section class="missions" aria-labelledby="mh">
+    <div class="mhead"><h2 id="mh">🚀 Missions</h2><span class="soon">Coming soon</span></div>
+    <p class="mintro">Big projects where you build something real and the skills are the moves.</p>
+    <div class="tabs" role="group" aria-label="Grade"><button data-g="2" aria-pressed="true">Grade 2</button><button data-g="5" aria-pressed="false">Grade 5</button></div>
+    <div class="cols" id="mcols"></div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</main>
+<script>
+(function(){
+"use strict";
+const $ = (s, r) => (r || document).querySelector(s);
+const h = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; };
+const ls = { get(k){ try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v){ try { localStorage.setItem(k, v); } catch (e) {} }, del(k){ try { localStorage.removeItem(k); } catch (e) {} } };
+const ss = { get(k){ try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set(k, v){ try { sessionStorage.setItem(k, v); } catch (e) {} }, del(k){ try { sessionStorage.removeItem(k); } catch (e) {} } };
+const HOME = () => ls.get("sv_mode") === "home";
+const PIN = () => ls.get("starverse_pin") || "";
+const unlocked = () => Date.now() - Number(ss.get("starverse_unlock") || 0) < 15 * 60 * 1000;
+const ymd = (d) => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const today = ymd(new Date()), yest = (() => { const d = new Date(); d.setDate(d.getDate() - 1); return ymd(d); })();
+
+const GRADES = [
+  { id: "g2", grade: 2, ic: "🧑‍🚀", rounds: 4, what: "Money, numbers, spelling, word puzzles, and more" },
+  { id: "g5", grade: 5, ic: "🚀", rounds: 5, what: "Fractions, graphs, word parts, editing, and more" }];
+
+const MISSIONS = {
+  2: { reading: [
+      ["🌻", "The Rooftop Garden Crew", "Figure out what every rooftop plant needs and grow a garden."],
+      ["🦁", "Animal Fact Files", "Build the displays for a brand-new zoo exhibit."],
+      ["📚", "The Story Corner", "Fill a library corner with poems, folktales, and a puppet play."],
+      ["📰", "The Field Day Times", "Sort the mail, check the facts, and print the front page."],
+      ["✏️", "My All About Book", "Write and publish a nonfiction book of your own."]],
+    math: [
+      ["🧁", "Bea's Bakery", "Count, pack, and sell treats on a busy bakery day."],
+      ["🎈", "The Party Planner", "Plan a party, from the balloons to the cake."],
+      ["🔨", "The Backyard Fort", "Measure, buy lumber, and build a fort."],
+      ["✨", "One more on the way", "A new Grade 2 Math Mission is being built."]] },
+  5: { reading: [
+      ["🔍", "The Case of the Missing Mascot", "The school mascot is gone. Read the clues and crack the case."],
+      ["🐢", "Saving the Shoreline", "Help a park ranger protect a sea turtle nesting beach."],
+      ["🏮", "The Story Keepers", "Collect myths, poems, and plays with a story expert in Morocco."],
+      ["🗳️", "The Riverbend Vote", "A town has $400,000. Weigh both sides and make your case."],
+      ["🎙️", "Curious Minds", "Research a big question and record your own science podcast."]],
+    math: [
+      ["🚁", "Ridge Runners", "Design, build, and race your own drone."],
+      ["🎮", "Game Studio", "Build a video game with a team of game designers."],
+      ["🐾", "Animal Rescue", "Run the daily work of an animal rescue center."],
+      ["🏛️", "Museum Wing", "Plan and open a brand-new museum wing."]] } };
+
+function readVault(){ try { const raw = HOME() ? ls.get("starvault_v1") : ss.get("starvault_v1"); return (JSON.parse(raw) || {}).profiles || {}; } catch (e) { return {}; } }
+function status(g){
+  const p = readVault()[g.id];
+  if (!p || !p.day || p.day.date !== today) return { text: "New vault today", open: false, streak: p ? p.streak : 0, last: p && p.last };
+  if (p.day.done) return { text: "Vault open ✓", open: true, streak: p.streak, last: p.last };
+  return { text: (p.day.round || 0) + " of " + g.rounds + " clues", open: false, streak: p.streak, last: p.last };
+}
+
+function render(){
+  const home = HOME();
+  $("#mode").innerHTML = home
+    ? '<span class="home">🏠 Saving is on for this device</span>'
+    : '<span>🏫 Classroom mode: nothing is saved</span>';
+  const gw = $("#grades"); gw.innerHTML = "";
+  GRADES.forEach(g => {
+    const st = status(g), streak = home && (st.last === today || st.last === yest) ? st.streak : 0;
+    gw.append(h(`<a class="grade g${g.grade}" href="vault/index.html?kid=${g.id}">
+      <div class="ic">${g.ic}</div><div class="nm">Grade ${g.grade}</div>
+      <div class="what">${g.what}</div>
+      <div class="status ${st.open ? "open" : ""}">🔐 ${st.text}${home ? " · ⭐ " + streak + "-day streak" : ""}</div><br>
+      <span class="go">Open Star Vault</span></a>`));
+  });
+  const f = $("#foot"); f.innerHTML = "";
+  if (home) {
+    const b = h('<button class="pill">🔐 Grown-ups</button>'); b.onclick = askPin; f.append(b);
+  } else {
+    const b = h('<button class="pill save">🏠 Playing at home? Turn on saving</button>'); b.onclick = setupStart; f.append(b);
+    if (ss.get("starvault_v1")) { const n = h('<button class="pill">✅ Done, next player</button>'); n.onclick = () => { ss.del("starvault_v1"); ss.del("sv_class_t"); render(); }; f.append(n); }
+  }
+  f.append(h('<div class="fine">No sign-in and no accounts. We don’t collect anything about you or your child. <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms of Use</a></div>'));
+  f.append(h('<div class="fine">TEKS-aligned. Not affiliated with or endorsed by the Texas Education Agency.</div>'));
+  f.append(h('<div class="fine">© 2026 NovaCore Technologies LLC. Starverse Learning is a product of NovaCore Technologies LLC. Questions? <a href="mailto:admin@novacoretechllc.com">admin@novacoretechllc.com</a></div>'));
+}
+
+let mg = 2;
+function renderMissions(){
+  const m = MISSIONS[mg], c = $("#mcols"); c.innerHTML = "";
+  [["📖 Reading", m.reading], ["🔢 Math", m.math]].forEach(([t, list]) => {
+    const col = h(`<div class="col"><h3>${t}</h3><ul class="mlist"></ul></div>`);
+    list.forEach(([e, n, d]) => { const li = h('<li><div class="e"></div><div><b></b><span></span></div></li>');
+      li.querySelector(".e").textContent = e; li.querySelector("b").textContent = n; li.querySelector("span").textContent = d; col.querySelector("ul").append(li); });
+    c.append(col);
+  });
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-pressed", String(Number(b.dataset.g) === mg)));
+}
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { mg = Number(b.dataset.g); renderMissions(); });
+
+/* ---------- overlays ---------- */
+function modal(html){ const ov = h(`<div class="overlay" role="dialog" aria-modal="true"><div class="modal">${html}</div></div>`); document.body.append(ov); return ov; }
+function shake(ov){ const m = $(".modal", ov); m.classList.remove("shake"); void m.offsetWidth; m.classList.add("shake"); }
+
+/* Turn on saving: explain → grown-up check → make a PIN */
+const ONES = ["zero","one","two","three","four","five","six","seven","eight","nine"];
+const TEENS = ["ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+const TENS = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+function words(n){ // 1000–9999
+  const th = Math.floor(n / 1000), hu = Math.floor(n / 100) % 10, rest = n % 100;
+  let s = ONES[th] + " thousand";
+  if (hu) s += ", " + ONES[hu] + " hundred";
+  if (rest) { s += (hu ? " " : ", "); s += rest < 10 ? ONES[rest] : rest < 20 ? TEENS[rest - 10] : TENS[Math.floor(rest / 10)] + (rest % 10 ? "-" + ONES[rest % 10] : ""); }
+  return s;
+}
+function setupStart(){
+  const ov = modal(`<h3>Turn on saving</h3>
+    <p>Saving keeps streaks, prizes, and the Gallery on <b>this device</b>. It also opens the Grown-ups area: help requests, skills, and reading checks.</p>
+    <ul><li>Use it on <b>one child’s</b> home device.</li><li>Leave it off on shared classroom computers, so kids don’t mix up each other’s progress.</li><li>Nothing ever leaves this device.</li></ul>
+    <div class="row"><button class="btn go2">I’m a grown-up</button><button class="btn ghost no">Not now</button></div>`);
+  $(".no", ov).onclick = () => ov.remove();
+  $(".go2", ov).onclick = () => { ov.remove(); grownCheck(); };
+}
+function grownCheck(){
+  const n = 1000 + Math.floor(Math.random() * 9000);
+  const ov = modal(`<h3>Grown-up check</h3><p>Type this number using digits:</p><p style="font-size:20px;color:var(--star)">${words(n)}</p>
+    <input inputmode="numeric" maxlength="4" aria-label="Number in digits" autocomplete="off"><div class="msg"></div>
+    <div class="row"><button class="btn ok">Next</button><button class="btn ghost no">Cancel</button></div>`);
+  const inp = $("input", ov); inp.focus();
+  const go = () => { if (inp.value.replace(/\D/g, "") === String(n)) { ov.remove(); makePin(); } else { $(".msg", ov).textContent = "That doesn’t match. Try again."; shake(ov); inp.value = ""; } };
+  $(".ok", ov).onclick = go; inp.onkeydown = (e) => { if (e.key === "Enter") go(); };
+  $(".no", ov).onclick = () => ov.remove();
+}
+function pinPad(title, sub, onDone, extra){
+  let pin = "";
+  const ov = modal(`<h3>${title}</h3><p>${sub}</p><div class="pinpad"><span></span><span></span><span></span><span></span></div><div class="pad"></div><div class="msg"></div>
+    <div class="row"><button class="btn ghost no">Cancel</button></div>${extra ? '<button class="link fg">Forgot your PIN?</button>' : ""}`);
+  const dots = ov.querySelectorAll(".pinpad span"), paint = () => dots.forEach((d, k) => d.classList.toggle("f", k < pin.length));
+  ["1","2","3","4","5","6","7","8","9","⌫","0"].forEach(k => { const b = h(`<button aria-label="${k === "⌫" ? "Delete" : k}">${k}</button>`);
+    b.onclick = () => { if (k === "⌫") pin = pin.slice(0, -1); else if (pin.length < 4) pin += k; paint();
+      if (pin.length === 4) { const p = pin; setTimeout(() => { if (onDone(p, ov) === false) { pin = ""; paint(); } }, 120); } };
+    $(".pad", ov).append(b); });
+  $(".no", ov).onclick = () => ov.remove();
+  if (extra) $(".fg", ov).onclick = () => { ov.remove(); forgot(); };
+  return ov;
+}
+function makePin(){
+  pinPad("Make a 4-digit PIN", "You’ll use it to open Grown-ups or turn saving off.", (p, ov) => {
+    ov.remove();
+    pinPad("Type it again", "Just to be sure.", (p2, ov2) => {
+      if (p2 !== p) { $(".msg", ov2).textContent = "Those didn’t match. Let’s start over."; shake(ov2); setTimeout(() => { ov2.remove(); makePin(); }, 900); return; }
+      ov2.remove();
+      ls.set("starverse_pin", p); ls.set("sv_mode", "home");
+      const cur = ss.get("starvault_v1"); if (cur && !ls.get("starvault_v1")) ls.set("starvault_v1", cur); // keep today's progress
+      ss.del("starvault_v1"); ss.del("sv_class_t");
+      ss.set("starverse_unlock", String(Date.now()));
+      const done = modal(`<h3>Saving is on ✓</h3><p>Saving is on for this device only. You’ll need your PIN to open Grown-ups or turn saving off.</p><div class="row"><button class="btn">Got it</button></div>`);
+      $("button", done).onclick = () => { done.remove(); render(); };
+    });
+  });
+}
+function askPin(){
+  if (unlocked()) { grownMenu(); return; }
+  pinPad("Grown-ups only 🔒", "Enter your 4-digit PIN.", (p, ov) => {
+    if (p === PIN()) { ss.set("starverse_unlock", String(Date.now())); ov.remove(); grownMenu(); return true; }
+    $(".msg", ov).textContent = "That’s not it. Try again."; shake(ov); return false;
+  }, true);
+}
+function grownMenu(){
+  const ov = modal(`<h3>Grown-ups</h3><div class="gopts">
+    <a href="vault/index.html?grownups=1">📊 Star Vault: help requests, skills, reading checks</a>
+    <button class="cp">🔑 Change the PIN</button>
+    <button class="off">🏫 Turn saving off</button></div>
+    <div class="row"><button class="btn ghost no">Close</button></div>`);
+  $(".no", ov).onclick = () => ov.remove();
+  $(".cp", ov).onclick = () => { ov.remove(); changePin(); };
+  $(".off", ov).onclick = () => { ov.remove(); turnOff(); };
+}
+function changePin(){
+  pinPad("New PIN", "Pick a new 4-digit PIN.", (p, ov) => {
+    ov.remove();
+    pinPad("Type it again", "Just to be sure.", (p2, ov2) => {
+      if (p2 !== p) { $(".msg", ov2).textContent = "Those didn’t match. Try again."; shake(ov2); setTimeout(() => { ov2.remove(); changePin(); }, 900); return; }
+      ls.set("starverse_pin", p); ov2.remove();
+      const d = modal(`<h3>PIN changed ✓</h3><div class="row"><button class="btn">OK</button></div>`); $("button", d).onclick = () => d.remove();
+    });
+  });
+}
+function wipe(){ ["starvault_v1", "starverse_pin", "sv_mode"].forEach(ls.del); ["starvault_v1", "sv_class_t", "starverse_unlock"].forEach(ss.del); }
+function turnOff(){
+  const ov = modal(`<h3>Turn saving off?</h3><p>This erases the streaks, prizes, Gallery, and Grown-ups records saved on this device, and switches back to Classroom mode.</p>
+    <div class="row"><button class="btn warn yes">Erase and turn off</button><button class="btn ghost no">Keep saving</button></div>`);
+  $(".no", ov).onclick = () => ov.remove();
+  $(".yes", ov).onclick = () => { wipe(); ov.remove(); render(); };
+}
+function forgot(){
+  const ov = modal(`<h3>Forgot your PIN?</h3><p>There’s no account to recover it from, so the only fix is to reset this device. That erases everything saved here and switches back to Classroom mode. You can turn saving on again with a new PIN.</p>
+    <div class="row"><button class="btn warn yes">Reset this device</button><button class="btn ghost no">Cancel</button></div>`);
+  $(".no", ov).onclick = () => ov.remove();
+  $(".yes", ov).onclick = () => { wipe(); ov.remove(); render(); };
+}
+
+render(); renderMissions();
+if (new URLSearchParams(location.search).get("setup") === "1") { history.replaceState(null, "", location.pathname); HOME() ? askPin() : setupStart(); }
+})();
+</script>
+</body>
+</html>
